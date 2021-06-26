@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flask Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <link rel="icon" href="login-favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<section class="hero is-fullheight" style="background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); font-family: 'Montserrat';">
+<div class="hero-head">
+    <nav class="navbar">
+        <div class="container">
+
+            <div id="navbarMenuHeroA" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="{{ url_for('main.index') }}" class="navbar-item">
+                            Home
+                    </a>
+                        {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                            Profile
+                    </a>
+                        {% endif %}
+                        {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                            Login
+                    </a>
+                    <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                            Sign Up
+                    </a>
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                            Logout
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</section>
+</body>
+
+</html>
